@@ -1,4 +1,4 @@
-Firefox Web Speech API
+webspeechapi
 ============
 
 Web Speech API Examples for Gecko
