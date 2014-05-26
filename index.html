@@ -1,128 +1,19 @@
-
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html" lang="en-US">
+<html>
 <head>
-<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-<meta name="viewport" content="width=device-width, user-scalable=no">
-<title>Firefox Web Speech API</title>
-
-<script src="jquery-1.11.0.min.js"></script>
-<script src="jquery-migrate-1.2.1.min.js"></script>
-<script src="index.js"></script>
-<style>
-    body {
-        font-family: Helvetica, sans-serif;
-        font-size: 11pt;
-        padding: 5px;
-        margin-left: 150px;
-        margin-right: 150px;
-        background-color: grey;
-    }
-    h2 {
-        font-weight: normal;
-        font-size: 24pt;
-    }
-    #controls {
-        text-align: center;
-    }
-    #start_button,#create_button,#set_grammar,#stop_button {
-        font-size: 16pt;
-    }
-    .transcript {
-        color: darkred;
-        font-size: 26pt;
-        border: 1px solid #ccc;
-        padding: 5px;
-        width:90%;
-        float:left;  
-        text-align: center;      
-    }
-    #instructions {
-        color: darkblue;
-        font-size: 14pt;
-        text-align: center;
-    }
-    .note {
-      background-color: #fff8f0;
-      padding: 5px 10px 5px 10px;
-      border: 1px solid #fdc;
-      border-radius: 7px;
-    }
-</style>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="textarea-helper.js"></script>
+    <script type="text/javascript" src="speech-recognizer.js"></script>
 </head>
-
 <body>
-
-<h2><center>Firefox Web Speech API</center></h2>
-
-
-<br><br><br><br>
-<div id="interim_transcript" class="transcript" >&nbsp;</div>
-<div style="float:left;padding-left:10px;padding-top:10px" id="mic"><img src="images/mic.png"></div>
-
-
-<p>&nbsp;</p>
-<br>
-<input type="checkbox" name="kws" id="kws">Wordspot</input>
-<br>
-<div id="instructions">Press buttons 1 to 5 to start recognition on words in textarea</div>
-<div id="gramdiv" style='display:visible'>
-    <p id="controls">
-        <button id="create_button">1. Click to instantiate SpeechRecognition()</button><br><br>
-        <button id="create_grammar">2. Click to create SpeechGrammarList obj</button> <br><br>       
-        <button id="set_grammar">3. Click to add string to grammar obj</button> <br><br>       
-        <button id="associate_grammar">4. Set SpeechRecognition with the GrammarList (jump this step) </button><br><br>
-        <button id="start_button">5. Click to Speak</button><br><br>
-        <button id="stop_button">6. If not detect the end o speech, click to stop listening</button> <br><br>   
-
-    </p>
-
-    <textarea rows="10" cols="100" id="gram">
-   #JSGF v1.0;
-           grammar fxosVoiceCommands;
-
-     
-          <timer> = set timer for [( <hours> hours )] [and] [ (<minutes> | <extended>)  minutes] ;
-           <hours> = one | two | three | four | five | six | seven | eight | nine | ten | eleven | twelve | thirteen | fourteen | fifteen | sixteen | seventeen | eighteen | nineteen | twenty | twenty one | twenty two | twenty three;  
-           <minutes> = one | two | three | four | five | six | seven | eight | nine | ten | eleven | twelve | thirteen | fourteen | fifteen | sixteen | seventeen | eighteen | nineteen ;
-           <extended> = <extended_0> [<extended_1>];
-           <extended_0> = twenty | thirty | forty | fifty ;
-           <extended_1> = one | two | three | four | five | six | seven | eight | nine  ;
-
-
-           <alarm> = set an alarm for [( <hours_alarm> )] [ (<minutes> | <extended>)]  ( a m | p m ) ;
-           <hours_alarm> =    one | two | three | four | five | six | seven | eight | nine | ten | eleven | twelve ;  
-
-
-           <app> =
-             phone |
-             contacts |
-             calendar | camera | clock | usage | email | gallery | marketplace | music | settings | messages | video | customizer | hackerplace | studio | sharing | twitter | firesea irc | calculator | webmaker | runwhatsapp preview | notes | swooop | facebook | bugzilla lite | buddyup | mozspeech | youtube | here maps | maps online | irccnotify | camera | dialer
-           ;
-           <contact> = adriano | mozilla | adriano mozilla | alencar | dnk | alencar dnk | desigan | chinniah | desigan chinniah | samanta | clara | vilas | boas | samanta clara vilas boas;
-           <digit> = zero | one | two | three | four | five | six | seven | eight | nine ;
-           public <simple> =
-             open <app> |
-             dial <digit>+ |
-             call <contact> |
-             <timer> | 
-             <alarm>
-           ;
-    </textarea> 
-</div>
-
-<div>
-  <select id="lang">
-      <option value="en-US">English</option>
-      <option value="fr-FR">French</option>
-      <option value="es-MX">Spanish</option>
-</select> 
-</div>
-
-
-
-
-
-</body>
+    <div id="main">
+        <div id="content">
+            <h1 id="about">Web Speech Example</h1>
+            <div id="example-type">textarea with JavaScript Web Speech API</div>
+            <div id="speech-content-elements">
+                <textarea id="speech-page-content" name="pageContent"></textarea>
+                <div class="speech-content-mic speech-mic"/>
+            </div>
+        </div>
+    </div>
 </html>
-
