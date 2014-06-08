@@ -1,19 +1,144 @@
-<html>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <script type="text/javascript" src="jquery.min.js"></script>
-    <script type="text/javascript" src="textarea-helper.js"></script>
-    <script type="text/javascript" src="speech-recognizer.js"></script>
+<title>Simple Web Speech Recognition Example</title>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<style>
+    body {
+        font-family: Helvetica, sans-serif;
+        font-size: 11pt;
+        padding: 5px;
+        margin-left: 150px;
+        margin-right: 150px;
+    }
+    h2 {
+        font-weight: normal;
+        font-size: 24pt;
+    }
+    #controls {
+        text-align: center;
+    }
+    #start_button {
+        font-size: 16pt;
+    }
+    #transcript {
+        color: darkred;
+        font-size: 16pt;
+        border: 1px solid #ccc;
+        padding: 5px;
+    }
+    #instructions {
+        color: darkblue;
+        font-size: 14pt;
+        text-align: center;
+    }
+    .note {
+      background-color: #fff8f0;
+      padding: 5px 10px 5px 10px;
+      border: 1px solid #fdc;
+      border-radius: 7px;
+    }
+</style>
 </head>
+
 <body>
-    <div id="main">
-        <div id="content">
-            <h1 id="about">Web Speech Example</h1>
-            <div id="example-type">textarea with JavaScript Web Speech API</div>
-            <div id="speech-content-elements">
-                <textarea id="speech-page-content" name="pageContent"></textarea>
-                <div class="speech-content-mic speech-mic"/>
-            </div>
-        </div>
-    </div>
+
+<h2>Web Speech Recognition Example</h2>
+
+
+
+<div id="transcript">&nbsp;</div>
+<p>&nbsp;</p>
+<div id="instructions">&nbsp;</div>
+<p id="controls">
+    <button id="start_button">Click to Start</button>
+</p>
+
+
+
+
+<script type="text/javascript">
+
+    var final_transcript = '';
+    var recognizing = false;
+
+    var language = 'en-GB';  // change this to your language
+
+    $(document).ready(function() {
+
+        // check that your browser supports the API
+        if (!('webkitSpeechRecognition' in window)) {
+            alert("Your Browser does not support the Speech API");
+
+        } else {
+
+            // Create the recognition object and define four event handlers (onstart, onerror, onend, onresult)
+
+            var recognition = new webkitSpeechRecognition();
+            recognition.continuous = true;         // keep processing input until stopped
+            recognition.interimResults = true;     // show interim results
+            recognition.lang = language;           // specify the language
+
+            recognition.onstart = function() {
+                recognizing = true;
+                $('#instructions').html('Speak slowly and clearly');
+                $('#start_button').html('Click to Stop');
+            };
+
+            recognition.onerror = function(event) {
+                console.log("There was a recognition error...");
+            };
+
+            recognition.onend = function() {
+                recognizing = false;
+                $('#instructions').html('Done');
+            };
+
+            recognition.onresult = function(event) {
+                var interim_transcript = '';
+
+                // Assemble the transcript from the array of results
+                for (var i = event.resultIndex; i < event.results.length; ++i) {
+                    if (event.results[i].isFinal) {
+                        final_transcript += event.results[i][0].transcript;
+                    } else {
+                        interim_transcript += event.results[i][0].transcript;
+                    }
+                }
+
+                console.log("interim:  " + interim_transcript);
+                console.log("final:    " + final_transcript);
+                // update the web page
+                if(final_transcript.length > 0) {
+                    $('#transcript').html(final_transcript);
+                }
+            };
+
+
+            $("#start_button").click(function(e) {
+                e.preventDefault();
+
+                if (recognizing) {
+                    recognition.stop();
+                    $('#start_button').html('Click to Start Again');
+                    recognizing = false;
+                } else {
+                    final_transcript = '';
+
+                    // Request access to the User's microphone and Start recognizing voice input
+                    recognition.start();
+
+                    $('#instructions').html('Allow the browser to use your Microphone');
+                    $('#start_button').html('waiting');
+                    $('#transcript').html('&nbsp;');
+                }
+            });
+        }
+    });
+
+</script>
+
+</body>
 </html>
+
