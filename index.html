@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html">
 <head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 <title>Simple Web Speech Recognition Example</title>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <style>
@@ -68,17 +69,18 @@
     $(document).ready(function() {
 
         // check that your browser supports the API
-        if (!('webkitSpeechRecognition' in window)) {
+        if (!('SpeechRecognition' in window)) {
             alert("Your Browser does not support the Speech API");
 
         } else {
 
             // Create the recognition object and define four event handlers (onstart, onerror, onend, onresult)
 
-            var recognition = new webkitSpeechRecognition();
-            recognition.continuous = true;         // keep processing input until stopped
-            recognition.interimResults = true;     // show interim results
-            recognition.lang = language;           // specify the language
+            var recognition = new SpeechRecognition();
+
+            //recognition.continuous = true;         // keep processing input until stopped // MOZ: NS_ERROR_NOT_IMPLEMENTED
+            //recognition.interimResults = true;     // show interim results // MOZ: NS_ERROR_NOT_IMPLEMENTED
+            //recognition.lang = language;           // specify the language // MOZ: NS_ERROR_NOT_IMPLEMENTED
 
             recognition.onstart = function() {
                 recognizing = true;
