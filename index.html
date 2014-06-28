@@ -20,7 +20,7 @@
     #controls {
         text-align: center;
     }
-    #start_button {
+    #start_button,#create_button {
         font-size: 16pt;
     }
     #transcript {
@@ -53,7 +53,8 @@
 <p>&nbsp;</p>
 <div id="instructions">&nbsp;</div>
 <p id="controls">
-    <button id="start_button">Click to Start</button>
+    <button id="create_button">Click to instantiate SpeechRecognition()</button><br><br>
+    <button id="start_button">Click to Speak</button>
 </p>
 
 
@@ -65,6 +66,7 @@
     var recognizing = false;
 
     var language = 'en-GB';  // change this to your language
+    var recognition;
 
     $(document).ready(function() {
 
@@ -74,49 +76,63 @@
 
         } else {
 
-            // Create the recognition object and define four event handlers (onstart, onerror, onend, onresult)
 
-            var recognition = new SpeechRecognition();
 
-            //recognition.continuous = true;         // keep processing input until stopped // MOZ: NS_ERROR_NOT_IMPLEMENTED
-            //recognition.interimResults = true;     // show interim results // MOZ: NS_ERROR_NOT_IMPLEMENTED
-            //recognition.lang = language;           // specify the language // MOZ: NS_ERROR_NOT_IMPLEMENTED
 
-            recognition.onstart = function() {
-                recognizing = true;
-                $('#instructions').html('Speak slowly and clearly');
-                $('#start_button').html('Click to Stop');
-            };
 
-            recognition.onerror = function(event) {
-                console.log("There was a recognition error...");
-            };
+            $("#create_button").click(function(e) {
 
-            recognition.onend = function() {
-                recognizing = false;
-                $('#instructions').html('Done');
-            };
+                    e.preventDefault();                
 
-            recognition.onresult = function(event) {
-                var interim_transcript = '';
 
-                // Assemble the transcript from the array of results
-                for (var i = event.resultIndex; i < event.results.length; ++i) {
-                    if (event.results[i].isFinal) {
-                        final_transcript += event.results[i][0].transcript;
-                    } else {
-                        interim_transcript += event.results[i][0].transcript;
-                    }
-                }
+                    // Create the recognition object and define four event handlers (onstart, onerror, onend, onresult)
+                    $('#instructions').html('Initing SpeechRecognition');                    
+                    recognition = new SpeechRecognition();     
+                    $('#instructions').html('SpeechRecognition ready');
 
-                console.log("interim:  " + interim_transcript);
-                console.log("final:    " + final_transcript);
-                // update the web page
-                if(final_transcript.length > 0) {
-                    $('#transcript').html(final_transcript);
-                }
-            };
 
+                    //recognition.continuous = true;         // keep processing input until stopped // MOZ: NS_ERROR_NOT_IMPLEMENTED
+                    //recognition.interimResults = true;     // show interim results // MOZ: NS_ERROR_NOT_IMPLEMENTED
+                    //recognition.lang = language;           // specify the language // MOZ: NS_ERROR_NOT_IMPLEMENTED
+
+
+                    recognition.onstart = function() {
+                        recognizing = true;
+                        $('#instructions').html('Speak slowly and clearly');
+                        $('#start_button').html('Click to Stop');
+                    };
+
+                    recognition.onerror = function(event) {
+                        console.log("There was a recognition error...");
+                    };
+
+                    recognition.onend = function() {
+                        recognizing = false;
+                        $('#instructions').html('Done');
+                    };
+
+                    recognition.onresult = function(event) {
+                        var interim_transcript = '';
+
+                        // Assemble the transcript from the array of results
+                        for (var i = event.resultIndex; i < event.results.length; ++i) {
+                            if (event.results[i].isFinal) {
+                                final_transcript += event.results[i][0].transcript;
+                            } else {
+                                interim_transcript += event.results[i][0].transcript;
+                            }
+                        }
+
+                        console.log("interim:  " + interim_transcript);
+                        console.log("final:    " + final_transcript);
+                        // update the web page
+                        if(final_transcript.length > 0) {
+                            $('#transcript').html(final_transcript);
+                        }
+                    };
+
+
+            });
 
             $("#start_button").click(function(e) {
                 e.preventDefault();
