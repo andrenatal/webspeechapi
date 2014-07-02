@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 <title>Simple Web Speech Recognition Example</title>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="jquery.min.js"></script>
 <style>
     body {
         font-family: Helvetica, sans-serif;
@@ -23,7 +23,7 @@
     #start_button,#create_button {
         font-size: 16pt;
     }
-    #transcript {
+    .transcript {
         color: darkred;
         font-size: 16pt;
         border: 1px solid #ccc;
@@ -48,8 +48,10 @@
 <h2>Web Speech Recognition Example</h2>
 
 
-
-<div id="transcript">&nbsp;</div>
+<div>Interim </div>
+<div id="interim_transcript" class="transcript" >&nbsp;</div>
+<div>Final </div>
+<div id="final_transcript"  class="transcript">&nbsp;</div>
 <p>&nbsp;</p>
 <div id="instructions">&nbsp;</div>
 <p id="controls">
@@ -112,13 +114,18 @@
                     };
 
                     recognition.onresult = function(event) {
+
+                        console.log("recognition.onresult called");
+
                         var interim_transcript = '';
 
                         // Assemble the transcript from the array of results
                         for (var i = event.resultIndex; i < event.results.length; ++i) {
                             if (event.results[i].isFinal) {
+                                console.log("recognition.onresult : isFinal");                                
                                 final_transcript += event.results[i][0].transcript;
                             } else {
+                                console.log("recognition.onresult : not isFinal");                                                                
                                 interim_transcript += event.results[i][0].transcript;
                             }
                         }
@@ -126,9 +133,9 @@
                         console.log("interim:  " + interim_transcript);
                         console.log("final:    " + final_transcript);
                         // update the web page
-                        if(final_transcript.length > 0) {
-                            $('#transcript').html(final_transcript);
-                        }
+                        
+                        $('#final_transcript').html(final_transcript);
+                        $('#interim_transcript').html(interim_transcript);                        
                     };
 
 
