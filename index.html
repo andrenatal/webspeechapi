@@ -56,7 +56,8 @@
 <div id="instructions">&nbsp;</div>
 <p id="controls">
     <button id="create_button">Click to instantiate SpeechRecognition()</button><br><br>
-    <button id="start_button">Click to Speak</button>
+    <button id="start_button">Click to Speak</button><br><br>
+    <button id="stop_button">Click to stop Speak</button> <br><br>   
 </p>
 
 
@@ -101,7 +102,6 @@
                     recognition.onstart = function() {
                         recognizing = true;
                         $('#instructions').html('Speak slowly and clearly');
-                        $('#start_button').html('Click to Stop');
                     };
 
                     recognition.onerror = function(event) {
@@ -135,29 +135,40 @@
                         // update the web page
                         
                         $('#final_transcript').html(final_transcript);
-                        $('#interim_transcript').html(interim_transcript);                        
+                        $('#interim_transcript').html(interim_transcript);            
+
+                        $('#start_button').html('Click to speak');
+            
                     };
 
+
+            });
+
+
+
+            $("#stop_button").click(function(e) {
+                e.preventDefault();
+
+                recognition.stop();
+                $('#start_button').html('Click to Start Again');
+                recognizing = false;
 
             });
 
             $("#start_button").click(function(e) {
                 e.preventDefault();
 
-                if (recognizing) {
-                    recognition.stop();
-                    $('#start_button').html('Click to Start Again');
-                    recognizing = false;
-                } else {
-                    final_transcript = '';
+                final_transcript = '';
 
-                    // Request access to the User's microphone and Start recognizing voice input
-                    recognition.start();
+                // Request access to the User's microphone and Start recognizing voice input
+                recognition.start();
 
-                    $('#instructions').html('Allow the browser to use your Microphone');
-                    $('#start_button').html('waiting');
-                    $('#transcript').html('&nbsp;');
-                }
+                $('#instructions').html('Allow the browser to use your Microphone');
+                $('#start_button').html('waiting');
+                $('#transcript').html('&nbsp;');
+
+                recognizing = true;
+            
             });
         }
     });
