@@ -58,6 +58,7 @@
     <button id="create_button">Click to instantiate SpeechRecognition()</button><br><br>
     <button id="start_button">Click to Speak</button><br><br>
     <button id="stop_button">Click to stop Speak</button> <br><br>   
+    <button id="set_grammar">Click to set Grammar</button> <br><br>   
 </p>
 
 
@@ -170,6 +171,20 @@
                 recognizing = true;
             
             });
+
+
+            $("#set_grammar").click(function(e) {
+                e.preventDefault();
+
+                var speechrecognitionlist = new SpeechGrammarList();
+
+                speechrecognitionlist.addFromString  ( "#JSGF V1.0; grammar test; public <simple> =  go forward ten meters  |  turn left | miami beach | george washington | open browser | call mary | travel to new york | brazil is so far ; " , 1 );
+            });
+
+
+
+
+
         }
     });
 
