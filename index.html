@@ -1,0 +1,195 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<title>Simple Web Speech Recognition Example</title>
+<script type="text/javascript" src="jquery.min.js"></script>
+<style>
+    body {
+        font-family: Helvetica, sans-serif;
+        font-size: 11pt;
+        padding: 5px;
+        margin-left: 150px;
+        margin-right: 150px;
+    }
+    h2 {
+        font-weight: normal;
+        font-size: 24pt;
+    }
+    #controls {
+        text-align: center;
+    }
+    #start_button,#create_button {
+        font-size: 16pt;
+    }
+    .transcript {
+        color: darkred;
+        font-size: 16pt;
+        border: 1px solid #ccc;
+        padding: 5px;
+    }
+    #instructions {
+        color: darkblue;
+        font-size: 14pt;
+        text-align: center;
+    }
+    .note {
+      background-color: #fff8f0;
+      padding: 5px 10px 5px 10px;
+      border: 1px solid #fdc;
+      border-radius: 7px;
+    }
+</style>
+</head>
+
+<body>
+
+<h2>Web Speech Recognition Example</h2>
+
+
+<div>Interim </div>
+<div id="interim_transcript" class="transcript" >&nbsp;</div>
+<div>Final </div>
+<div id="final_transcript"  class="transcript">&nbsp;</div>
+<p>&nbsp;</p>
+<div id="instructions">&nbsp;</div>
+<p id="controls">
+    <button id="create_button">Click to instantiate SpeechRecognition()</button><br><br>
+    <button id="start_button">Click to Speak</button><br><br>
+    <button id="stop_button">Click to stop Speak</button> <br><br>   
+    <button id="set_grammar">Click to set Grammar</button> <br><br>   
+</p>
+
+
+
+
+<script type="text/javascript">
+
+    var final_transcript = '';
+    var recognizing = false;
+
+    var language = 'en-GB';  // change this to your language
+    var recognition;
+
+    $(document).ready(function() {
+
+        // check that your browser supports the API
+        if (!('SpeechRecognition' in window)) {
+            alert("Your Browser does not support the Speech API");
+
+        } else {
+
+
+
+
+
+            $("#create_button").click(function(e) {
+
+                    e.preventDefault();                
+
+
+                    // Create the recognition object and define four event handlers (onstart, onerror, onend, onresult)
+                    $('#instructions').html('Initing SpeechRecognition');                    
+                    recognition = new SpeechRecognition();     
+                    $('#instructions').html('SpeechRecognition ready');
+
+
+                    //recognition.continuous = true;         // keep processing input until stopped // MOZ: NS_ERROR_NOT_IMPLEMENTED
+                    //recognition.interimResults = true;     // show interim results // MOZ: NS_ERROR_NOT_IMPLEMENTED
+                    //recognition.lang = language;           // specify the language // MOZ: NS_ERROR_NOT_IMPLEMENTED
+
+
+                    recognition.onstart = function() {
+                        recognizing = true;
+                        $('#instructions').html('Speak slowly and clearly');
+                    };
+
+                    recognition.onerror = function(event) {
+                        console.log("There was a recognition error...");
+                    };
+
+                    recognition.onend = function() {
+                        recognizing = false;
+                        $('#instructions').html('Done');
+                    };
+
+                    recognition.onresult = function(event) {
+
+                        console.log("recognition.onresult called");
+
+                        var interim_transcript = '';
+
+                        // Assemble the transcript from the array of results
+                        for (var i = event.resultIndex; i < event.results.length; ++i) {
+                            if (event.results[i].isFinal) {
+                                console.log("recognition.onresult : isFinal");                                
+                                final_transcript += event.results[i][0].transcript;
+                            } else {
+                                console.log("recognition.onresult : not isFinal");                                                                
+                                interim_transcript += event.results[i][0].transcript;
+                            }
+                        }
+
+                        console.log("interim:  " + interim_transcript);
+                        console.log("final:    " + final_transcript);
+                        // update the web page
+                        
+                        $('#final_transcript').html(final_transcript);
+                        $('#interim_transcript').html(interim_transcript);            
+
+                        $('#start_button').html('Click to speak');
+            
+                    };
+
+
+            });
+
+
+
+            $("#stop_button").click(function(e) {
+                e.preventDefault();
+
+                recognition.stop();
+                $('#start_button').html('Click to Start Again');
+                recognizing = false;
+
+            });
+
+            $("#start_button").click(function(e) {
+                e.preventDefault();
+
+                final_transcript = '';
+
+                // Request access to the User's microphone and Start recognizing voice input
+                recognition.start();
+
+                $('#instructions').html('Allow the browser to use your Microphone');
+                $('#start_button').html('waiting');
+                $('#transcript').html('&nbsp;');
+
+                recognizing = true;
+            
+            });
+
+
+            $("#set_grammar").click(function(e) {
+                e.preventDefault();
+
+                var speechrecognitionlist = new SpeechGrammarList();
+
+                speechrecognitionlist.addFromString  ( "#JSGF V1.0; grammar test; public <simple> =  go forward ten meters  |  turn left | miami beach | george washington | open browser | call mary | travel to new york | brazil is so far ; " , 1 );
+            });
+
+
+
+
+
+        }
+    });
+
+</script>
+
+</body>
+</html>
+
