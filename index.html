@@ -123,6 +123,7 @@
                         console.log("recognition.onresult called");
 
                         var interim_transcript = '';
+                        var score = '';
 
                         // Assemble the transcript from the array of results
                         for (var i = event.resultIndex; i < event.results.length; ++i) {
@@ -132,6 +133,7 @@
                             } else {
                                 console.log("recognition.onresult : not isFinal");                                                                
                                 interim_transcript += event.results[i][0].transcript;
+                                score = event.results[i][0].confidence;
                             }
                         }
 
@@ -139,8 +141,8 @@
                         console.log("final:    " + final_transcript);
                         // update the web page
                         
-                        $('#final_transcript').html(final_transcript);
-                        $('#interim_transcript').html(interim_transcript);            
+                        $('#final_transcript').html(final_transcript + ' ' +  score);
+                        $('#interim_transcript').html(interim_transcript + ' ' + score )  ;            
 
                         $('#start_button').html('Click to speak');
             
