@@ -56,8 +56,8 @@
 <p>&nbsp;</p>
 <div id="instructions">&nbsp;</div>
 <p id="controls">
-    <button id="create_button">1. Click to instantiate SpeechRecognition()</button><br><br>
-    <button id="set_grammar">2. Click to set Grammar</button> <br><br>       
+    <button id="set_grammar">1. Click to set Grammar</button> <br><br>       
+    <button id="create_button">2. Click to instantiate SpeechRecognition()</button><br><br>
     <button id="start_button">3. Click to Speak</button><br><br>
     <button id="stop_button">4. If not detect the end o speech, click to stop listening</button> <br><br>   
 
@@ -95,6 +95,8 @@
                     // Create the recognition object and define four event handlers (onstart, onerror, onend, onresult)
                     $('#instructions').html('Initing SpeechRecognition');                    
                     recognition = new SpeechRecognition();     
+
+                    recognition.grammars = speechrecognitionlist;                
 
                     $('#instructions').html('SpeechRecognition ready');
 
@@ -167,6 +169,7 @@
 
                 final_transcript = '';
 
+
                 // Request access to the User's microphone and Start recognizing voice input
                 recognition.start();
 
@@ -186,7 +189,6 @@
 
                 speechrecognitionlist = new SpeechGrammarList();
                 speechrecognitionlist.addFromString  ( $('#gram').val() , 1 );
-                recognition.grammars = speechrecognitionlist;                
             });
 
 
