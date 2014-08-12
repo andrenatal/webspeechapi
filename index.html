@@ -56,8 +56,8 @@
 <p>&nbsp;</p>
 <div id="instructions">&nbsp;</div>
 <p id="controls">
-    <button id="create_button">1. Click to instantiate SpeechRecognition()</button><br><br>
-    <button id="set_grammar">2. Click to set Grammar</button> <br><br>       
+    <button id="set_grammar">1. Click to set Grammar to recognize</button> <br><br>       
+    <button id="create_button">2. Click to instantiate SpeechRecognition()</button><br><br>
     <button id="start_button">3. Click to Speak</button><br><br>
     <button id="stop_button">4. If not detect the end o speech, click to stop listening</button> <br><br>   
 
@@ -82,18 +82,14 @@
             alert("Your Browser does not support the Speech API");
 
         } else {
-
-
-
-
-
-            $("#create_button").click(function(e) {
+            
+             $("#create_button").click(function(e) {
 
                     e.preventDefault();                
 
 
                     // Create the recognition object and define four event handlers (onstart, onerror, onend, onresult)
-                    $('#instructions').html('Initing SpeechRecognition');                    
+                    $('#instructions').html('Creating SpeechRecognition');                    
                     recognition = new SpeechRecognition();     
 
                     $('#instructions').html('SpeechRecognition ready');
@@ -167,6 +163,8 @@
 
                 final_transcript = '';
 
+                recognition.grammars = speechrecognitionlist;                
+
                 // Request access to the User's microphone and Start recognizing voice input
                 recognition.start();
 
@@ -186,7 +184,7 @@
 
                 speechrecognitionlist = new SpeechGrammarList();
                 speechrecognitionlist.addFromString  ( $('#gram').val() , 1 );
-                recognition.grammars = speechrecognitionlist;                
+                
             });
 
 
