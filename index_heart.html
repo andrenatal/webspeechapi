@@ -4,7 +4,7 @@
 <head>
 	<title>Title of the document</title>
 </head>
-<script src="http://code.jquery.com/jquery-2.0.0.js"></script>
+
 
 <style>
 /* Most of the heart's CSS came from the Shapes of CSS  */
@@ -210,7 +210,7 @@ function speak ()
         console.log("final:    " + final_transcript);
         // update the web page
         
-        $('#final_transcript').html(interim_transcript + ' ' +  score);
+         document.getElementById('final_transcript').innerHTML = interim_transcript + ' ' +  score;
 
     };
 }
