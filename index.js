@@ -98,8 +98,8 @@
                         console.log("final:    " + final_transcript);
                         // update the web page
                         
-                        $('#final_transcript').html(final_transcript + ' ' +  score);
-                        $('#interim_transcript').html(interim_transcript + ' ' + score )  ;            
+                        $('#final_transcript').html(final_transcript );
+                        $('#interim_transcript').html(interim_transcript  )  ;            
 
                         $('#start_button').html('Click to speak');
             
