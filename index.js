@@ -12,14 +12,10 @@
     var down = [];
     $(document).keydown(function(e) {
         down[e.keyCode] = true;
-        console.log(e.keyCode);
     }).keyup(function(e) {
     
 
         if (down[17] && down[65] ) {
-            console.log("pressed the button");
-
-
 
             if ($('#gramdiv').is(':hidden'))
             {
