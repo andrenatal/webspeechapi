@@ -176,7 +176,7 @@
             $("#associate_grammar").click(function(e) {
                 e.preventDefault();
                 recognition.grammars = speechrecognitionlist;                
-                $('#instructions').html('associate_grammar set');                
+                
             });
 
         }
