@@ -52,7 +52,7 @@
                     // Create the recognition object and define four event handlers (onstart, onerror, onend, onresult)
                    // $('#instructions').html('Creating SpeechRecognition');                    
                     recognition = new SpeechRecognition();     
-
+                    recognition.continuous = true;
                     $('#instructions').html('SpeechRecognition ready');
 
 
