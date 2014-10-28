@@ -1,0 +1,29 @@
+{
+  "name": "Webspeech API",
+  "description": "WebSpeech API",
+  "type" : "certified",
+  "launch_path": "/index.html",
+  "icons": {
+    "128": "/img/icon.png",
+    "120": "/img/icon.png",
+    "512": "/img/icon.png"
+  },
+  "developer": {
+    "name": "Andre Natal",
+    "url": "http://your-homepage-here.org"
+  },
+  "default_locale": "en",
+   "permissions": {
+      "contacts": {
+        "description" : "Reading out contacts",
+        "access": "readcreate"
+      },
+      "telephony": {
+        "description" : "Make calls"
+      },
+      "audio-capture" : {
+        "description" : "Audio capture"
+      }
+
+    }
+}

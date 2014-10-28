@@ -56,6 +56,16 @@
                     $('#instructions').html('SpeechRecognition ready');
 
 
+                    if ($("#kws").is(':checked'))
+                    {
+                        recognition.continuous = true;
+                    }
+                    else
+                    {
+                        recognition.continuous = false;
+                    }
+
+
                     //recognition.continuous = true;         // keep processing input until stopped // MOZ: NS_ERROR_NOT_IMPLEMENTED
                     //recognition.interimResults = true;     // show interim results // MOZ: NS_ERROR_NOT_IMPLEMENTED
                     //recognition.lang = language;           // specify the language // MOZ: NS_ERROR_NOT_IMPLEMENTED
@@ -122,6 +132,9 @@
 
                 final_transcript = '';
 
+                //alert("clicked");
+
+
 
                 // Request access to the User's microphone and Start recognizing voice input
                 recognition.start();
@@ -140,6 +153,7 @@
 
                 final_transcript = '';
 
+                //alert("clicked");
 
                 // Request access to the User's microphone and Start recognizing voice input
                 recognition.start();
