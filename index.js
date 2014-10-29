@@ -8,7 +8,7 @@
     var language = 'en-GB';  // change this to your language
     var recognition;
     var speechrecognitionlist ;
-
+    var gumstream; 
     var down = [];
     $(document).keydown(function(e) {
         down[e.keyCode] = true;
@@ -31,7 +31,34 @@
     }); 
 
     $(document).ready(function() {
+        
+        navigator.getUserMedia = ( navigator.getUserMedia ||
+                               navigator.webkitGetUserMedia ||
+                               navigator.mozGetUserMedia ||
+                               navigator.msGetUserMedia);
 
+            
+            if (navigator.getUserMedia) {
+               navigator.getUserMedia (
+            
+                  // constraints
+                  {
+                     audio: true
+                  },
+            
+                  // successCallback
+                  function(localMediaStream) {
+                        gumstream = localMediaStream;
+                  },
+            
+                  // errorCallback
+                  function(err) {
+                     alert("The following error occured: " + err);
+                  }
+               );
+            } else {
+               alert("getUserMedia not supported");
+            }
 
  
 
@@ -137,7 +164,7 @@
 
 
                 // Request access to the User's microphone and Start recognizing voice input
-                recognition.start();
+                recognition.start(gumstream);
 
                 $('#instructions').html('Allow the browser to use your Microphone');
                 $('#start_button').html('waiting');
