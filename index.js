@@ -52,7 +52,7 @@
                     
                     $('#instructions').html('SpeechRecognition ready');
 
-
+/*
                     if ($("#kws").is(':checked'))
                     {
                         recognition.continuous = true;
@@ -61,7 +61,7 @@
                     {
                         recognition.continuous = false;
                     }
-
+*/
 
                     //recognition.continuous = true;         // keep processing input until stopped // MOZ: NS_ERROR_NOT_IMPLEMENTED
                     //recognition.interimResults = true;     // show interim results // MOZ: NS_ERROR_NOT_IMPLEMENTED
