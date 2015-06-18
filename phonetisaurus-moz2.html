@@ -203,11 +203,13 @@
 
 	function call(name)
 	{
-		Module.callMain(['--input=' + name]);
+		name2 = document.getElementById('palavra').value;
+		Module.callMain(['--input=' + name2]);
 
 	}
 
     </script>
+    <input type=text value="" id="palavra"></input>
     <input type="button" value="btn1" onClick="call('andre');"></input>
     <input type="button" value="btn2" onClick="call('sandip');"></input>
 
