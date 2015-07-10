@@ -1,0 +1,59 @@
+<style>
+  body { font-family: 'helvetica' }
+  #intro {
+    color: #555;
+    margin-bottom: 20px;
+  }
+  .pane {
+    width: 320px;
+    float: left;
+    overflow: hidden;
+    margin-right: 20px;
+  }
+  .pane .wrap {
+    position: relative;
+  }
+  .pane .wrap audio {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+  .notification {
+    text-align: center;
+    padding: 5px;
+  }
+  .notification::before {
+    content: "● ";
+    color: red;
+    text-shadow: 0px 0px 3px rgba(255,0,0,0.5);
+  }
+
+</style>
+
+
+
+<div class='pane' id='ira'>
+    <div id='iraSpeaking' class='notification' style='display:none'>Ira Glass is Speaking</div>
+</div>
+<br>
+<div class='pane' id='ira2'>
+    <div id='finalresult' class='finalresult' style='display:visible'></div>
+</div>
+
+
+<div class='pane' id='mic'>
+  <video width=320></video>
+  <div id='userSpeaking' class='notification' style='display:none'>You are Speaking</div>
+</div>
+<div class='pane'>
+  <canvas width=320 height=240></canvas>
+</div>
+
+<button id="start_speak">Push to speak</button> <br><br>       
+
+    <textarea rows="10" cols="100" id="gram">
+     
+  #JSGF V1.0; grammar test; public <simple> =   this is a demo | of the voice inputs | in two different accents | i speak in indian accent | i speak in brazilian accent | we hope this thing becomes huge | here is to the open web | lets say a few other things | how deep is the atlantic ocean | go forward ten meters ;
+
+    </textarea> 
+<script src='demo.bundle.js'></script>
