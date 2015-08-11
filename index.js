@@ -47,11 +47,11 @@
                     e.preventDefault();                
 
 
-var sr = new SpeechRecognition();
-sr.lang ="en-US";
+recognition = new SpeechRecognition();
+recognition.lang ="en-US";
 var sgl = new SpeechGrammarList();
 sgl.addFromString($('#gram').val() , 1);
-sr. grammars = sgl;
+recognition.grammars = sgl;
 
 
 /*
