@@ -43,14 +43,23 @@
 
             $("#create_button").click(function(e) {
 
+
                     e.preventDefault();                
 
 
+var sr = new SpeechRecognition();
+sr.lang ="en-US";
+var sgl = new SpeechGrammarList();
+sgl.addFromString($('#gram').val() , 1);
+sr. grammars = sgl;
+
+
+/*
                     // Create the recognition object and define four event handlers (onstart, onerror, onend, onresult)
                    // $('#instructions').html('Creating SpeechRecognition');                    
                     recognition = new SpeechRecognition();     
                     recognition.lang ="fr-FR";
-                    
+  */                  
                     $('#instructions').html('SpeechRecognition ready');
 
 /*
@@ -127,41 +136,26 @@
 
             $("#start_button").click(function(e) {
                 e.preventDefault();
-
                 final_transcript = '';
-
                 //alert("clicked");
-
-
-
                 // Request access to the User's microphone and Start recognizing voice input
                 recognition.start();
-
                 $('#instructions').html('Allow the browser to use your Microphone');
                 $('#start_button').html('waiting');
                 $('#transcript').html('&nbsp;');
-
                 recognizing = true;
-            
             });
-
 
             $("#mic").click(function(e) {
                 e.preventDefault();
-
                 final_transcript = '';
-
                 //alert("clicked");
-
                 // Request access to the User's microphone and Start recognizing voice input
                 recognition.start();
-
                 $('#instructions').html('Allow the browser to use your Microphone');
                 $('#start_button').html('waiting');
                 $('#transcript').html('&nbsp;');
-
                 recognizing = true;
-            
             });
 
 
