@@ -49,7 +49,7 @@
                     // Create the recognition object and define four event handlers (onstart, onerror, onend, onresult)
                    // $('#instructions').html('Creating SpeechRecognition');                    
                     recognition = new SpeechRecognition();     
-                    recognition.lang ="en-US";
+                    recognition.lang ="fr-FR";
                     
                     $('#instructions').html('SpeechRecognition ready');
 
