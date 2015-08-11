@@ -49,6 +49,7 @@
                     // Create the recognition object and define four event handlers (onstart, onerror, onend, onresult)
                    // $('#instructions').html('Creating SpeechRecognition');                    
                     recognition = new SpeechRecognition();     
+                    recognition.lang ="en-US";
                     
                     $('#instructions').html('SpeechRecognition ready');
 
@@ -183,7 +184,6 @@
             $("#associate_grammar").click(function(e) {
                 e.preventDefault();
                 recognition.grammars = speechrecognitionlist;                
-                
             });
 
         }
