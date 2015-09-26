@@ -46,9 +46,9 @@
 
                     e.preventDefault();                
 
-
+alert($('#lang').val());
 recognition = new SpeechRecognition();
-recognition.lang ="en-US";
+recognition.lang = "en-US";
 var sgl = new SpeechGrammarList();
 sgl.addFromString($('#gram').val() , 1);
 recognition.grammars = sgl;
