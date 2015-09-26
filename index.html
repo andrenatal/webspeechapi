@@ -78,6 +78,7 @@
 
     <textarea rows="10" cols="100" id="gram">
      
+          
         
    #JSGF v1.0;
            grammar fxosVoiceCommands;
@@ -91,7 +92,7 @@
            <extense_1> = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9  ;
 
 
-           <alarm> = set an alarm for [( <hours_alarm> hours )] [and] [ (<minutes> | <extense>)  minutes];
+           <alarm> = set an alarm for [( <hours_alarm> )] [ (<minutes> | <extense>)]  ( a m | p m ) ;
            <hours_alarm> =    one | two | three | four | five | six | seven | eight | nine | ten | eleven | twelve ;  
 
 
@@ -111,6 +112,8 @@
            ;
    
    
+    
+    
     
     </textarea> 
 </div>
