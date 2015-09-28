@@ -77,22 +77,19 @@
     </p>
 
     <textarea rows="10" cols="100" id="gram">
-     
-          
-        
    #JSGF v1.0;
            grammar fxosVoiceCommands;
 
      
-          <timer> = set timer for [( <hours> hours )] [and] [ (<minutes> | <extense>)  minutes] ;
+          <timer> = set timer for [( <hours> hours )] [and] [ (<minutes> | <extended>)  minutes] ;
            <hours> = one | two | three | four | five | six | seven | eight | nine | ten | eleven | twelve | thirteen | fourteen | fifteen | sixteen | seventeen | eighteen | nineteen | twenty | twenty one | twenty two | twenty three;  
            <minutes> = one | two | three | four | five | six | seven | eight | nine | ten | eleven | twelve | thirteen | fourteen | fifteen | sixteen | seventeen | eighteen | nineteen ;
-           <extense> = <extense_0> [<extense_1>];
-           <extense_0> = twenty | thirty | forty | fifty ;
-           <extense_1> = one | two | three | four | five | six | seven | eight | nine  ;
+           <extended> = <extended_0> [<extended_1>];
+           <extended_0> = twenty | thirty | forty | fifty ;
+           <extended_1> = one | two | three | four | five | six | seven | eight | nine  ;
 
 
-           <alarm> = set an alarm for [( <hours_alarm> )] [ (<minutes> | <extense>)]  ( a m | p m ) ;
+           <alarm> = set an alarm for [( <hours_alarm> )] [ (<minutes> | <extended>)]  ( a m | p m ) ;
            <hours_alarm> =    one | two | three | four | five | six | seven | eight | nine | ten | eleven | twelve ;  
 
 
@@ -110,11 +107,6 @@
              <timer> | 
              <alarm>
            ;
-   
-   
-    
-    
-    
     </textarea> 
 </div>
 
