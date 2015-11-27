@@ -39,16 +39,13 @@
         } 
         else 
         {
+            // 1 - 
             $("#create_button").click(function(e) {
                 
                     e.preventDefault();                
                     
                     recognition = new SpeechRecognition();
                     recognition.lang = "en-US";
-                    
-                                        var sgl = new SpeechGrammarList();
-                    sgl.addFromString($('#gram').val() , 1);
-                    recognition.grammars = sgl;
                     
                     $('#instructions').html('SpeechRecognition ready');
 
@@ -96,17 +93,29 @@
             
                     };
             });
+            
+            // 2- 
+            $("#create_grammar").click(function(e) {
+                e.preventDefault();                
+                speechrecognitionlist = new SpeechGrammarList();
+                $('#instructions').html('SpeechGrammarList created');                                
+            });
 
-            $("#stop_button").click(function(e) {
+            // 3 - 
+            $("#set_grammar").click(function(e) {
                 e.preventDefault();
-
-                recognition.stop();
-                $('#start_button').html('Click to Start Again');
-                recognizing = false;
-
+                speechrecognitionlist.addFromString  ( $('#gram').val() , 1 );
+                $('#instructions').html('Grammar set');
             });
             
-            $("#start_button").click(function(e) {
+            //4 - 
+            $("#associate_grammar").click(function(e) {
+                e.preventDefault();
+                recognition.grammars = speechrecognitionlist;                
+            });
+            
+            //5- 
+             $("#start_button").click(function(e) {
                 e.preventDefault();
                 final_transcript = '';
                 //alert("clicked");
@@ -117,7 +126,16 @@
                 $('#transcript').html('&nbsp;');
                 recognizing = true;
             });
+            
+            $("#stop_button").click(function(e) {
+                e.preventDefault();
 
+                recognition.stop();
+                $('#start_button').html('Click to Start Again');
+                recognizing = false;
+
+            });
+            
             $("#mic").click(function(e) {
                 e.preventDefault();
                 final_transcript = '';
@@ -130,22 +148,10 @@
                 recognizing = true;
             });
 
-            $("#set_grammar").click(function(e) {
-                e.preventDefault();
-                speechrecognitionlist.addFromString  ( $('#gram').val() , 1 );
-                $('#instructions').html('Grammar set');
-            });
-            
-            $("#create_grammar").click(function(e) {
-                e.preventDefault();                
-                speechrecognitionlist = new SpeechGrammarList();
-                $('#instructions').html('SpeechGrammarList created');                                
-            });
 
-            $("#associate_grammar").click(function(e) {
-                e.preventDefault();
-                recognition.grammars = speechrecognitionlist;                
-            });
+            
+
+
         }
     });
 
