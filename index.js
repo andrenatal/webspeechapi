@@ -36,13 +36,11 @@
         // check that your browser supports the API
         if (!('SpeechRecognition' in window)) {
             alert("Your Browser does not support the Speech API");
-
         } 
         else 
         {
-
             $("#create_button").click(function(e) {
-
+                
                     e.preventDefault();                
                     
                     recognition = new SpeechRecognition();
