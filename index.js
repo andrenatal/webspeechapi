@@ -43,39 +43,16 @@
 
             $("#create_button").click(function(e) {
 
-
                     e.preventDefault();                
-
-recognition = new SpeechRecognition();
-recognition.lang = "en-US";
-var sgl = new SpeechGrammarList();
-sgl.addFromString($('#gram').val() , 1);
-recognition.grammars = sgl;
-
-
-/*
-                    // Create the recognition object and define four event handlers (onstart, onerror, onend, onresult)
-                   // $('#instructions').html('Creating SpeechRecognition');                    
-                    recognition = new SpeechRecognition();     
-                    recognition.lang ="fr-FR";
-  */                  
+                    
+                    recognition = new SpeechRecognition();
+                    recognition.lang = "en-US";
+                    
+                                        var sgl = new SpeechGrammarList();
+                    sgl.addFromString($('#gram').val() , 1);
+                    recognition.grammars = sgl;
+                    
                     $('#instructions').html('SpeechRecognition ready');
-
-/*
-                    if ($("#kws").is(':checked'))
-                    {
-                        recognition.continuous = true;
-                    }
-                    else
-                    {
-                        recognition.continuous = false;
-                    }
-*/
-
-                    //recognition.continuous = true;         // keep processing input until stopped // MOZ: NS_ERROR_NOT_IMPLEMENTED
-                    //recognition.interimResults = true;     // show interim results // MOZ: NS_ERROR_NOT_IMPLEMENTED
-                    //recognition.lang = language;           // specify the language // MOZ: NS_ERROR_NOT_IMPLEMENTED
-
 
                     recognition.onstart = function() {
                         recognizing = true;
@@ -120,8 +97,6 @@ recognition.grammars = sgl;
                         $('#start_button').html('Click to speak');
             
                     };
-
-
             });
 
             $("#stop_button").click(function(e) {
@@ -132,7 +107,7 @@ recognition.grammars = sgl;
                 recognizing = false;
 
             });
-
+            
             $("#start_button").click(function(e) {
                 e.preventDefault();
                 final_transcript = '';
@@ -157,33 +132,23 @@ recognition.grammars = sgl;
                 recognizing = true;
             });
 
-
-
             $("#set_grammar").click(function(e) {
                 e.preventDefault();
                 speechrecognitionlist.addFromString  ( $('#gram').val() , 1 );
                 $('#instructions').html('Grammar set');
             });
-
-
+            
             $("#create_grammar").click(function(e) {
                 e.preventDefault();                
                 speechrecognitionlist = new SpeechGrammarList();
                 $('#instructions').html('SpeechGrammarList created');                                
             });
 
-
-
             $("#associate_grammar").click(function(e) {
                 e.preventDefault();
                 recognition.grammars = speechrecognitionlist;                
             });
-
         }
-
-
-
-
     });
 
 
