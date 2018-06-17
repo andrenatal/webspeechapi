@@ -2,7 +2,7 @@ var final_transcript = '';
 var recognizing = false;
 
 var language = 'en-GB';  // change this to your language
-var recognition;
+//var recognition;
 var speechrecognitionlist ;
 var gumstream;
 var down = [];
@@ -33,7 +33,7 @@ window.onload = function() {
             };
 
             recognition.onerror = function(event) {
-                document.querySelector('#log_resultado').value += "There was a recognition error... \n";
+                document.querySelector('#log_resultado').value += "There was a recognition error... " + event.message + " \n";
             };
 
             recognition.onend = function() {
