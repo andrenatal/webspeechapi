@@ -93,7 +93,6 @@ window.onload = function() {
             speechrecognitionlist.addFromString("", 1);
             recognition.grammars = speechrecognitionlist;
             recognition.start(dest.stream);
-            //recognition.abort();
             myAudio.play();
 
             document.querySelector('#log_resultado').value += 'SpeechRecognition ready \n';
