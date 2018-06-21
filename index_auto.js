@@ -17,7 +17,6 @@ window.onload = function() {
     {
         document.querySelector('#button_microphone').onclick = function(e) {
 
-            e.preventDefault();
             recognition = new SpeechRecognition();
             recognition.lang = "en-US";
             speechrecognitionlist = new SpeechGrammarList();
@@ -28,7 +27,6 @@ window.onload = function() {
             document.querySelector('#log_resultado').value += 'SpeechRecognition ready \n';
 
             recognition.onstart = function() {
-                recognizing = true;
                 document.querySelector('#log_resultado').value += 'Speak slowly and clearly  \n';
             };
 
@@ -37,8 +35,12 @@ window.onload = function() {
             };
 
             recognition.onend = function() {
-                recognizing = false;
                 document.querySelector('#log_resultado').value += 'Done \n';
+                // Get the checkbox
+                var checkBox = document.getElementById("auto_start");
+                if (checkBox.checked == true){
+                    recognition.start();
+                }
             };
 
             recognition.onresult = function(event) {
@@ -64,8 +66,12 @@ window.onload = function() {
             };
         };
 
-        document.querySelector('#button_automatic').onclick = function(e) {
+        document.querySelector('#button_abort').onclick = function(e) {
+            recognition.abort();
+        };
 
+        document.querySelector('#button_automatic').onclick = function(e) {
+/*
             var samples_list = {};
             samples_list["audio-wsa.ogg"] = "how are you";
             samples_list["audio-wsa2.ogg"] = "how are you 2";
@@ -74,7 +80,7 @@ window.onload = function() {
                 var value = samples_list[key];
                 console.log(key,value);
             }
-
+*/
             var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
             var myAudio = document.getElementById("audio-wsa");
             var dest = audioCtx.createMediaStreamDestination();
@@ -87,12 +93,12 @@ window.onload = function() {
             speechrecognitionlist.addFromString("", 1);
             recognition.grammars = speechrecognitionlist;
             recognition.start(dest.stream);
+            //recognition.abort();
             myAudio.play();
 
             document.querySelector('#log_resultado').value += 'SpeechRecognition ready \n';
 
             recognition.onstart = function() {
-                recognizing = true;
                 document.querySelector('#log_resultado').value += 'Speak slowly and clearly  \n';
             };
 
@@ -101,8 +107,13 @@ window.onload = function() {
             };
 
             recognition.onend = function() {
-                recognizing = false;
                 document.querySelector('#log_resultado').value += 'Done \n';
+                // Get the checkbox
+                var checkBox = document.getElementById("auto_start");
+                if (checkBox.checked == true){
+                    recognition.start(dest.stream);
+                    myAudio.play();
+                }
             };
 
             recognition.onresult = function(event) {
