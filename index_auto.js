@@ -61,7 +61,7 @@ window.onload = function() {
                 }
 
                 console.log("final:    " + final_transcript);
-                document.querySelector('#log_resultado').value += final_transcript + " \n";
+                document.querySelector('#log_resultado').value += final_transcript + "," + score + " \n";
                 document.querySelector("#log_resultado").scrollTop = document.querySelector("#log_resultado").scrollHeight
             };
         };
@@ -133,7 +133,7 @@ window.onload = function() {
                 }
 
                 console.log("final:    " + final_transcript);
-                document.querySelector('#log_resultado').value += final_transcript + " \n";
+                document.querySelector('#log_resultado').value += final_transcript + "," + score + " \n";
                 document.querySelector("#log_resultado").scrollTop = document.querySelector("#log_resultado").scrollHeight
             };
         };
