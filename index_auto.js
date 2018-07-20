@@ -53,6 +53,7 @@ window.onload = function() {
                     if (event.results[i].isFinal) {
                         console.log("recognition.onresult : isFinal");
                         final_transcript = event.results[i][0].transcript;
+                        score = event.results[i][0].confidence;
                     } else {
                         console.log("recognition.onresult : not isFinal");
                         final_transcript = event.results[i][0].transcript;
@@ -125,6 +126,7 @@ window.onload = function() {
                     if (event.results[i].isFinal) {
                         console.log("recognition.onresult : isFinal");
                         final_transcript = event.results[i][0].transcript;
+                        score = event.results[i][0].confidence;
                     } else {
                         console.log("recognition.onresult : not isFinal");
                         final_transcript = event.results[i][0].transcript;
