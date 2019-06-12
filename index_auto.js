@@ -18,7 +18,7 @@ window.onload = function() {
         document.querySelector('#button_microphone').onclick = function(e) {
 
             recognition = new SpeechRecognition();
-            recognition.lang = "en-US";
+            recognition.lang = document.querySelector('#language').value;
             speechrecognitionlist = new SpeechGrammarList();
             speechrecognitionlist.addFromString("", 1);
             recognition.grammars = speechrecognitionlist;
