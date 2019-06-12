@@ -18,7 +18,7 @@ window.onload = function() {
         document.querySelector('#button_microphone').onclick = function(e) {
 
             recognition = new SpeechRecognition();
-            recognition.lang = document.querySelector('#language').value;
+            recognition.lang = document.getElementById('language').value;
             speechrecognitionlist = new SpeechGrammarList();
             speechrecognitionlist.addFromString("", 1);
             recognition.grammars = speechrecognitionlist;
@@ -141,7 +141,3 @@ window.onload = function() {
         };
     }
 };
-
-
-
-
