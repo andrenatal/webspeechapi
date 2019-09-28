@@ -1,6 +1,5 @@
 /* eslint-disable max-lines-per-function */
 var final_transcript = "";
-var language = "en-US";
 var speechrecognitionlist;
 var recognizing = false;
 var recognition;
@@ -37,6 +36,14 @@ const append_to_chatwindow = (value, direction, background) => {
     if (direction === "left"){
         // synthesize
         say(value);
+    }
+}
+
+const determine_intent = intent => {
+    const lang = voiceSelect.selectedOptions[0].getAttribute("data-lang");
+    if (intent.indexOf("weather") &&  intent.indexOf("amsterdam") &&
+        lang === "en-US") {
+        append_to_chatwindow("Cold and rainy", "left", "lightgray");
     }
 }
 
@@ -96,7 +103,7 @@ window.onload = () => {
                     }
                 }
                 append_to_chatwindow(final_transcript, "right", "lightgreen");
-                append_to_chatwindow("my name is andré", "left", "lightgreen");
+                determine_intent(final_transcript);
                 console.log("final:    " + final_transcript + "," + score);
             };
         };
