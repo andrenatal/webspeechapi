@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html" lang="en-US">
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<meta name="viewport" content="width=device-width, user-scalable=yes">
+<title>Firefox Web Speech API</title>
+<script src="index_auto.js"></script>
+<style>
+    body {
+        font-family: Helvetica, sans-serif;
+        font-size: 11pt;
+        padding: 5px;
+        margin-left: 150px;
+        margin-right: 150px;
+        background-color: grey;
+    }
+    h2 {
+        font-weight: normal;
+        font-size: 24pt;
+    }
+    #controls {
+        text-align: center;
+    }
+    button {
+        font-size: 16pt;
+    }
+    .transcript {
+        color: darkred;
+        font-size: 26pt;
+        border: 1px solid #ccc;
+        padding: 5px;
+        width:90%;
+        float:left;
+        text-align: center;
+    }
+    #instructions {
+        color: darkblue;
+        font-size: 14pt;
+        text-align: center;
+    }
+    .note {
+      background-color: #fff8f0;
+      padding: 5px 10px 5px 10px;
+      border: 1px solid #fdc;
+      border-radius: 7px;
+    }
+</style>
+</head>
+<body>
+    <h2><center>Firefox Web Speech API</center></h2>
+    <br>
+    <br>
+    <div id="buttons" style='float:left; padding-right: 2px; text-align: center'>
+            <button id="button_automatic">Start WSA auto testing</button><br><br>
+            <button id="button_microphone">Start WSA microphone testing</button><br><br>
+            <input type="text" value="en-US" id="language"/><br><br>
+            <button id="button_abort">Abort WSA</button><br><br>
+            Restart onend: <input type="checkbox" id="auto_start"></Checkbox:><br><br>
+            <audio id="audio-wsa" src="audio-wsa.ogg" controls> Your browser does not support the <code>audio</code> element.</audio><br>
+    </div>
+    <div id="results" style='float:left; padding-left: 20px;'>
+        <textarea rows="40" cols="50" id="log_resultado"></textarea>
+    </div>
+</body>
+</html>
+

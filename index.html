@@ -5,7 +5,6 @@
 <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 <meta name="viewport" content="width=device-width, user-scalable=yes">
 <title>Firefox Web Speech API</title>
-<script src="index_auto.js"></script>
 <style>
     body {
         font-family: Helvetica, sans-serif;
@@ -13,55 +12,62 @@
         padding: 5px;
         margin-left: 150px;
         margin-right: 150px;
-        background-color: grey;
+        background-color: lightblue;
     }
     h2 {
         font-weight: normal;
         font-size: 24pt;
     }
-    #controls {
-        text-align: center;
+
+    #rcorners1 {
+    border-radius: 10px;
+    background: white;
+    padding: 20px;
+    width: 25vw;
+    margin: 0 auto;
+    height: 65vh;
+    overflow-y: scroll;
     }
-    button {
-        font-size: 16pt;
+
+    #microphone {
+    height: 6em;
+    width: 6em;
+    margin: 0 auto;
     }
-    .transcript {
-        color: darkred;
-        font-size: 26pt;
-        border: 1px solid #ccc;
-        padding: 5px;
-        width:90%;
-        float:left;
-        text-align: center;
+
+    #micdiv {
+    margin: 0 auto;
+    text-align: center;
+    padding: 10px;
     }
-    #instructions {
-        color: darkblue;
-        font-size: 14pt;
-        text-align: center;
+
+    #rcorners2 {
+    border-radius: 5px;
+    padding: 20px;
+    font-weight: 300;
     }
-    .note {
-      background-color: #fff8f0;
-      padding: 5px 10px 5px 10px;
-      border: 1px solid #fdc;
-      border-radius: 7px;
+
+    #wrapper_voices {
+    margin: 0 auto;
+    width: 25vw;
+    text-align: center;
     }
 </style>
 </head>
 <body>
-    <h2><center>Firefox Web Speech API</center></h2>
+    <h2><center>Firefox Web Speech API Chatbot</center></h2>
     <br>
-    <br>
-    <div id="buttons" style='float:left; padding-right: 2px; text-align: center'>
-            <button id="button_automatic">Start WSA auto testing</button><br><br>
-            <button id="button_microphone">Start WSA microphone testing</button><br><br>
-            <input type="text" value="en-US" id="language"/><br><br>
-            <button id="button_abort">Abort WSA</button><br><br>
-            Restart onend: <input type="checkbox" id="auto_start"></Checkbox:><br><br>
-            <audio id="audio-wsa" src="audio-wsa.ogg" controls> Your browser does not support the <code>audio</code> element.</audio><br>
+    <form>
+    <div id="wrapper_voices">
+    <select id="voices">
+    </select>
     </div>
-    <div id="results" style='float:left; padding-left: 20px;'>
-        <textarea rows="40" cols="50" id="log_resultado"></textarea>
-    </div>
+    <br><br>
+    <p id="rcorners1"></p>
+    <p id="micdiv"><img id="microphone" src="mic.png"/></p>
+    <script src="index_chatbot.js"></script>
+    </form>
+
 </body>
 </html>
 
