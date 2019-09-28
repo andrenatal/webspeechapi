@@ -41,9 +41,12 @@ const append_to_chatwindow = (value, direction, background) => {
 
 const determine_intent = intent => {
     const lang = voiceSelect.selectedOptions[0].getAttribute("data-lang");
-    if (intent.indexOf("weather") &&  intent.indexOf("amsterdam") &&
-        lang === "en-US") {
-        append_to_chatwindow("Cold and rainy", "left", "lightgray");
+    if (lang === "en-US") {
+        if (intent.indexOf("weather") > -1 && intent.indexOf("amsterdam") > -1) {
+            append_to_chatwindow("Cold and rainy", "left", "lightgray");
+        } else {
+            append_to_chatwindow("Sorry I didn't understand", "left", "lightgray");
+        }
     }
 }
 
