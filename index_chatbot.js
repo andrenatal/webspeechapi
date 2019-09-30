@@ -44,6 +44,8 @@ const determine_intent = intent => {
     if (lang === "en-US") {
         if (intent.toLowerCase().indexOf("weather") > -1 && intent.toLowerCase().indexOf("amsterdam") > -1) {
             append_to_chatwindow("Cold and rainy", "left", "lightgray");
+        } else if (intent.toLowerCase().indexOf("best") > -1 && intent.toLowerCase().indexOf("browser") > -1) {
+            append_to_chatwindow("Firefox of course", "left", "lightgray");
         } else {
             append_to_chatwindow("Sorry I didn't understand", "left", "lightgray");
         }
