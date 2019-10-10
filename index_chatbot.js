@@ -69,9 +69,9 @@ window.onload = () => {
 
             recognition = new SpeechRecognition();
             recognition.lang = voiceSelect.selectedOptions[0].getAttribute("data-lang");
-            speechrecognitionlist = new SpeechGrammarList();
-            speechrecognitionlist.addFromString("", 1);
-            recognition.grammars = speechrecognitionlist;
+            //speechrecognitionlist = new SpeechGrammarList();
+            //speechrecognitionlist.addFromString("", 1);
+            //recognition.grammars = speechrecognitionlist;
             recognition.start();
 
             console.log("SpeechRecognition ready");
