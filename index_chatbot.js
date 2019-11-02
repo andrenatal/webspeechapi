@@ -42,14 +42,19 @@ const append_to_chatwindow = (value, direction, background) => {
 const determine_intent = intent => {
     const lang = voiceSelect.selectedOptions[0].getAttribute("data-lang");
     if (lang === "en-US") {
-        if (intent.toLowerCase().indexOf("weather") > -1 && intent.toLowerCase().indexOf("amsterdam") > -1) {
-            append_to_chatwindow("Cold and rainy", "left", "lightgray");
+        if (intent.toLowerCase().indexOf("weather") > -1 && intent.toLowerCase().indexOf("singapore") > -1) {
+            append_to_chatwindow("Sunny and warm!", "left", "lightgray");
         } else if (intent.toLowerCase().indexOf("best") > -1 && intent.toLowerCase().indexOf("browser") > -1) {
             append_to_chatwindow("Firefox of course", "left", "lightgray");
         } else {
             append_to_chatwindow("Sorry I didn't understand", "left", "lightgray");
         }
     }
+}
+
+const displayStatus = status => {
+    document.querySelector("#status").innerText = status;
+    console.log(status);
 }
 
 window.onload = () => {
@@ -69,47 +74,44 @@ window.onload = () => {
 
             recognition = new SpeechRecognition();
             recognition.lang = voiceSelect.selectedOptions[0].getAttribute("data-lang");
-            //speechrecognitionlist = new SpeechGrammarList();
-            //speechrecognitionlist.addFromString("", 1);
-            //recognition.grammars = speechrecognitionlist;
             recognition.start();
 
-            console.log("SpeechRecognition ready");
+            displayStatus("SpeechRecognition ready");
 
             recognition.onstart = function() {
                 recognizing = true;
-                console.log("Speak slowly and clearly");
+                displayStatus("Speak slowly and clearly");
             };
 
             recognition.onerror = function(event) {
-                console.log("There was a recognition error... " + event.message);
+                displayStatus("There was a recognition error... " + event.message);
             };
 
             recognition.onend = function() {
-                console.log("Done");
+                displayStatus("Done");
                 recognizing = false;
             };
 
             recognition.onresult = function(event) {
 
-                console.log("recognition.onresult called");
+                displayStatus("recognition.onresult called");
                 var score = "";
 
                 // Assemble the transcript from the array of results
                 for (var i = event.resultIndex; i < event.results.length; ++i) {
                     if (event.results[i].isFinal) {
-                        console.log("recognition.onresult : isFinal");
+                        displayStatus("recognition.onresult : isFinal");
                         final_transcript = event.results[i][0].transcript;
                         score = event.results[i][0].confidence;
                     } else {
-                        console.log("recognition.onresult : not isFinal");
+                        displayStatus("recognition.onresult : not isFinal");
                         final_transcript = event.results[i][0].transcript;
                         score = event.results[i][0].confidence;
                     }
                 }
                 append_to_chatwindow(final_transcript, "right", "lightgreen");
                 determine_intent(final_transcript);
-                console.log("final:    " + final_transcript + "," + score);
+                displayStatus("final:    " + final_transcript + "," + score);
             };
         };
     }
